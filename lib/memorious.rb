@@ -16,7 +16,7 @@ class Method
   end
 end
 
-# Public: By including Memorious a class can make it methods memoized.
+# Public: By including Memorious a class can make its methods memoized.
 #
 # Examples
 #
