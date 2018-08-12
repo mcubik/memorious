@@ -16,7 +16,7 @@ class Method
   end
 end
 
-# Public: By including the Memorious a class tell methods to use memoization.
+# Public: By including Memorious a class can make it methods memoized.
 #
 # Examples
 #
@@ -36,18 +36,18 @@ module Memorious
     base.include(InstanceSide)
   end
 
-  # Class methods to be added to the class
+  # Private: Class methods to be added to the class
   module ClassSide
-    # Public:  memoize adds memory to a method
+    # Public: memoize adds memory to a method
     def memoize(method_name)
       memo = Memo.new(instance_method(method_name))
       define_method(method_name) { |*args| memo.call(*[self] + args) }
     end
   end
 
-  # Instance methods to be added to the class
+  # Private: Instance methods to be added to the class
   module InstanceSide
-    # Says wheather the class of the instance supports memoization
+    # Public: Says wheather the class of the instance supports memoization
     def memorious?
       true
     end
@@ -73,8 +73,7 @@ module Memorious
   end
 end
 
-# Private: A Memo intercepts the calls to method to ensure that
-# it gets executed only once for each different list of arguments.
+# Private: A Memo intercepts a method and caches all its invocations. 
 class Memo
   def initialize(method)
     @method = method
